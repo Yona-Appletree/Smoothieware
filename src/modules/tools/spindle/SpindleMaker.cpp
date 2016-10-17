@@ -12,6 +12,7 @@
 #include "PWMSpindleControl.h"
 #include "AnalogSpindleControl.h"
 #include "HuanyangSpindleControl.h"
+#include "NowforeverSpindleControl.h"
 #include "Config.h"
 #include "checksumm.h"
 #include "ConfigValue.h"
@@ -44,6 +45,8 @@ void SpindleMaker::load_spindle(){
     } else if ( spindle_type.compare("modbus") == 0 ) {
         if(vfd_type.compare("huanyang") == 0) { 
             spindle = new HuanyangSpindleControl();
+        } else if(vfd_type.compare("nowforever") == 0) {
+            spindle = new NowforeverSpindleControl();
         } else {
             delete spindle;
             THEKERNEL->streams->printf("ERROR: No valid spindle VFD type defined\n");
